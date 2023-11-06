@@ -2,8 +2,7 @@
     "env": {
         "browser": true,
         "node": true,
-        "es6": true,
-        "jest": true
+        "es6": true
     },
     "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
     "parser": "@typescript-eslint/parser",
@@ -11,7 +10,7 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": ["@typescript-eslint", "jest", "prettier"],
+    "plugins": ["@typescript-eslint", "prettier"],
     "rules": {
         "no-console": "warn",
         "@typescript-eslint/no-explicit-any": "warn",

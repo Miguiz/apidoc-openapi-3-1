@@ -24,6 +24,7 @@ program
     .option('-v, --verbose', 'Verbose debug output.', false)
 
     .option('-d, --debug', 'Show debug messages.', false)
+    .option('-q, --quiet', 'Turn all output off', false)
 
     .option('--filter-by <<tag-filter=value>', 'Filter documentation by tag', '')
     .option('--parse-filters <parse-filters>', 'Optional user defined filters. Format name=filename', collect, [])
@@ -43,18 +44,17 @@ export const options: DocOptions & {output?: string} = {
     src: argv.input.length ? path.resolve(argv.input) + path.sep : './',
     output: argv.output,
 
+    silent: argv.quiet,
     verbose: argv.verbose,
     debug: argv.debug,
     config: argv.config,
 
-    // filters: transformToObject(argv.parseFilters),
-    // languages: transformToObject(argv.parseLanguages),
-    // parsers: transformToObject(argv.parseParsers),
     workers: transformToObject(argv.parseWorkers),
 
     dryRun: argv.dryRun,
 
     encoding: argv.encoding,
+    markdown: argv.markdown,
 
     apiprivate: argv.private,
 
