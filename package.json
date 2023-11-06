@@ -26,7 +26,7 @@
         "url": "https://github.com/Miguiz/apidoc-openapi-3-1.git"
     },
     "engines": {
-        "node": ">=14.0.0"
+        "node": ">=16.0.0"
     },
     "author": "Miguiz",
     "license": "ISC",
