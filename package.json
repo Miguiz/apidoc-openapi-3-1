@@ -1,0 +1,51 @@
+{
+    "name": "apidoc-openapi-3-1",
+    "version": "1.0.0",
+    "description": "Utility for generate documentation of API like project.",
+    "keywords": [
+        "apidoc",
+        "documentation",
+        "swagger",
+        "openapi"
+    ],
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "bin": {
+        "apidoc-openapi-3-1": "./bin/index.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "bin": "node bin/index.js",
+        "help": "node bin/index.js -h",
+        "lint": "eslint .",
+        "lint-fix": "eslint . --fix --quiet",
+        "prettier": "prettier --write --log-level silent \"{src,__tests__}/**/*.{js,ts,jsx,tsx}\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Miguiz/apidoc-openapi-3-1.git"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "author": "Miguiz",
+    "license": "ISC",
+    "dependencies": {
+        "apidoc-light": "^0.53.1",
+        "commander": "^11.1.0",
+        "generate-schema": "^2.6.0",
+        "openapi-types": "^12.1.3",
+        "path-to-regexp": "^6.2.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.8.10",
+        "@typescript-eslint/eslint-plugin": "^6.9.1",
+        "@typescript-eslint/parser": "^6.9.1",
+        "eslint": "^8.53.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-jest": "^27.6.0",
+        "eslint-plugin-prettier": "^5.0.1",
+        "prettier": "^3.0.3",
+        "typescript": "^5.2.2"
+    }
+}
