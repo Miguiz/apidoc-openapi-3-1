@@ -18,8 +18,8 @@ export function toSwagger(apidocJson: Record<string, any>[], projectJson: Record
 }
 
 // Removes <p> </p> tags from text
-function removeTags(text: string) {
-    return text ? text.replace(/(<([^>]+)>)/gi, '') : text;
+function removeTags(text: unknown) {
+    return typeof text === 'string' ? text.replace(/(<([^>]+)>)/gi, '') : '';
 }
 
 function addInfo(projectJson: Record<string, any>) {
@@ -71,7 +71,7 @@ function extractPaths(apidocJson: Record<string, any>[]) {
     return paths;
 }
 
-function mapHeaderItem(i: Record<string, any>) {
+function mapHeaderItem(i: Record<string, any>): OpenAPIV3_1.ParameterObject {
     return {
         in: 'header',
         name: i.field,
@@ -80,11 +80,12 @@ function mapHeaderItem(i: Record<string, any>) {
         schema: {
             type: 'string',
             default: i.defaultValue,
+            example: i.defaultValue,
         },
     };
 }
 
-function mapParameterItem(i: Record<string, any>) {
+function mapParameterItem(i: Record<string, any>): OpenAPIV3_1.ParameterObject {
     return {
         in: 'path',
         name: i.field,
@@ -93,11 +94,12 @@ function mapParameterItem(i: Record<string, any>) {
         schema: {
             type: 'string',
             default: i.defaultValue,
+            example: i.defaultValue,
         },
     };
 }
 
-function mapQueryItem(i: Record<string, any>) {
+function mapQueryItem(i: Record<string, any>): OpenAPIV3_1.ParameterObject {
     return {
         in: 'query',
         name: i.field,
@@ -106,6 +108,7 @@ function mapQueryItem(i: Record<string, any>) {
         schema: {
             type: 'string',
             default: i.defaultValue,
+            example: i.defaultValue
         },
     };
 }
@@ -149,7 +152,7 @@ function transferApidocParamsToSwaggerBody(apiDocParams: Record<string, any>[], 
                     items: {
                         type: type.slice(0, -2),
                         description: removeTags(i.description),
-                        // default: i.defaultValue,
+                        default: i.defaultValue,
                         example: i.defaultValue,
                     },
                     type: 'array',
@@ -168,6 +171,7 @@ function transferApidocParamsToSwaggerBody(apiDocParams: Record<string, any>[], 
                 type,
                 description: removeTags(i.description),
                 default: i.defaultValue,
+                example: i.defaultValue,
             };
         }
         if (!i.optional) {
@@ -241,6 +245,7 @@ function generateParameters(verb: Record<string, any>) {
 function generateRequestBody(verb: Record<string, any>, mixedBody: Record<string, any>[]) {
     const bodyParameter: OpenAPIV3_1.MediaTypeObject = {
         schema: {
+            description: '',
             properties: {},
             type: 'object',
             required: [],
@@ -248,11 +253,10 @@ function generateRequestBody(verb: Record<string, any>, mixedBody: Record<string
     };
 
     if (verb?.parameter?.examples?.length > 0) {
-        for (const example of verb.parameter.examples) {
-            const {json} = safeParseJson(example.content);
-            bodyParameter.schema = GenerateSchema.json(example.title, json);
-            //bodyParameter.description = example.title;
-        }
+        const example = verb.parameter.examples[0];
+        const {json} = safeParseJson(example.content);
+        bodyParameter.schema = GenerateSchema.json(example.title ?? '', json);
+        //bodyParameter.description = example.title;
     }
 
     transferApidocParamsToSwaggerBody(mixedBody, bodyParameter);
@@ -275,7 +279,7 @@ function generateResponses(verb: Record<string, any>) {
             const schema = GenerateSchema.json(example.title, json);
 
             responses[code] = {
-                description: example.title,
+                description: example.title ?? 'OK',
                 content: {'application/json': {schema}},
             };
         }
@@ -287,7 +291,7 @@ function generateResponses(verb: Record<string, any>) {
             const schema = GenerateSchema.json(example.title, json);
 
             responses[code] = {
-                description: example.title,
+                description: example.title ?? 'ERROR',
                 content: {'application/json': {schema}},
             };
         }
@@ -322,7 +326,7 @@ function mountResponseSpecSchema(verb: Record<string, any>, responses: Record<st
         };
         transferApidocParamsToSwaggerBody(responseSpec, bodyParameter);
         responses[responseCode] = {
-            description: responseSpec.title,
+            description: responseSpec.title ?? '',
             content: {
                 'application/json': bodyParameter,
             },
