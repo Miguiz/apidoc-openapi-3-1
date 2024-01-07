@@ -1,1 +1,160 @@
-{"openapi":"3.1.0","info":{"title":"Acme project","version":"0.0.0","description":"REST Api"},"servers":[{"url":"http://localhost/","description":"API Server URL"}],"paths":{"/test_api/{id}":{"post":{"tags":["search"],"summary":"test_api_name","description":"desc_test_api","requestBody":{"content":{"application/json":{"schema":{"$schema":"http://json-schema.org/draft-04/schema#","title":"request_desc","type":"object","properties":{"foo":{"type":"array","items":{"type":"object","properties":{"foz":{"type":"string","description":"desc_foo.foz"},"fizz":{"type":"string","description":"desc_foo.fizz"}},"required":["foz","fizz"]}}},"required":["foo"]}}}},"parameters":[{"in":"path","name":"id","description":"Unique ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"tar","description":"desc_tar","required":false,"schema":{"type":"string"}},{"in":"query","name":"bar","description":"desc_bar","required":true,"schema":{"type":"string","default":"bar"}},{"in":"header","name":"taz","description":"desc_taz","required":false,"schema":{"type":"string"}},{"in":"query","name":"baz","description":"desc_baz","required":true,"schema":{"type":"string","default":"baz"}}],"responses":{"200":{"content":{"application/json":{"schema":{"properties":{"code":{"type":"number","description":"desc_override_code","default":"1"},"data":{"type":"object","properties":{"keyInDoc":{"type":"number","description":"desc_add_extra_data_key_in_doc"}},"required":["keyInDoc"]}},"type":"object","required":["data"]}}}},"300":{"description":"error_desc","content":{"application/json":{"schema":{"$schema":"http://json-schema.org/draft-04/schema#","title":"error_desc","type":"object","properties":{}}}}}}}}}}
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Acme project",
+        "version": "0.0.0",
+        "description": "REST Api"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/",
+            "description": "API Server URL"
+        }
+    ],
+    "paths": {
+        "/test_api/{id}": {
+            "post": {
+                "tags": [
+                    "search"
+                ],
+                "summary": "test_api_name",
+                "description": "desc_test_api",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$schema": "http://json-schema.org/draft-04/schema#",
+                                "title": "request_desc",
+                                "type": "object",
+                                "properties": {
+                                    "foo": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "foz": {
+                                                    "type": "string",
+                                                    "description": "desc_foo.foz"
+                                                },
+                                                "fizz": {
+                                                    "type": "string",
+                                                    "description": "desc_foo.fizz"
+                                                }
+                                            },
+                                            "required": [
+                                                "foz",
+                                                "fizz"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "foo"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Unique ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tar",
+                        "description": "desc_tar",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "bar",
+                        "description": "desc_bar",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "bar",
+                            "example": "bar"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "taz",
+                        "description": "desc_taz",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "baz",
+                        "description": "desc_baz",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "baz",
+                            "example": "baz"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "description": "desc_override_code",
+                                            "default": "1",
+                                            "example": "1"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "keyInDoc": {
+                                                    "type": "number",
+                                                    "description": "desc_add_extra_data_key_in_doc"
+                                                }
+                                            },
+                                            "required": [
+                                                "keyInDoc"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object",
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "300": {
+                        "description": "error_desc",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$schema": "http://json-schema.org/draft-04/schema#",
+                                    "title": "error_desc",
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
