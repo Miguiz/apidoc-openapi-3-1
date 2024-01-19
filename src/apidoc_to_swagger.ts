@@ -108,7 +108,7 @@ function mapQueryItem(i: Record<string, any>): OpenAPIV3_1.ParameterObject {
         schema: {
             type: 'string',
             default: i.defaultValue,
-            example: i.defaultValue
+            example: i.defaultValue,
         },
     };
 }
@@ -280,7 +280,15 @@ function generateResponses(verb: Record<string, any>) {
 
             responses[code] = {
                 description: example.title ?? 'OK',
-                content: {'application/json': {schema}},
+                content: {
+                    'application/json': {
+                        schema,
+                        examples: {
+                            ...(responses[code]?.content?.examples ?? {}),
+                            [example.title]: json,
+                        },
+                    },
+                },
             };
         }
     }
@@ -292,7 +300,15 @@ function generateResponses(verb: Record<string, any>) {
 
             responses[code] = {
                 description: example.title ?? 'ERROR',
-                content: {'application/json': {schema}},
+                content: {
+                    'application/json': {
+                        schema,
+                        examples: {
+                            ...(responses[code]?.content?.examples ?? {}),
+                            [example.title]: json,
+                        },
+                    },
+                },
             };
         }
     }
@@ -317,6 +333,7 @@ function mountResponseSpecSchema(verb: Record<string, any>, responses: Record<st
             continue;
         }
         const responseSpec = fields[field];
+        const responseExamples = responses[responseCode]?.content?.['application/json']?.examples;
         const bodyParameter: OpenAPIV3_1.MediaTypeObject = {
             schema: {
                 properties: {},
@@ -328,7 +345,7 @@ function mountResponseSpecSchema(verb: Record<string, any>, responses: Record<st
         responses[responseCode] = {
             description: responseSpec.title ?? '',
             content: {
-                'application/json': bodyParameter,
+                'application/json': {...bodyParameter, examples: responseExamples},
             },
         };
     }
@@ -352,7 +369,7 @@ function safeParseJson(content: string, defaultCode = 200) {
     const mayCodeSplit = mayCodeString.trim().split(' ');
     const code = mayCodeSplit.length === 3 ? parseInt(mayCodeSplit[1]) : defaultCode;
 
-    let json = {};
+    let json: Record<string, any> = {};
     try {
         json = JSON.parse(mayContentString.replace(/,([ \t\n]+[}\])])/g, '$1'));
     } catch (error) {

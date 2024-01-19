@@ -14,9 +14,7 @@
     "paths": {
         "/test_api/{id}": {
             "post": {
-                "tags": [
-                    "search"
-                ],
+                "tags": ["search"],
                 "summary": "test_api_name",
                 "description": "desc_test_api",
                 "requestBody": {
@@ -41,16 +39,11 @@
                                                     "description": "desc_foo.fizz"
                                                 }
                                             },
-                                            "required": [
-                                                "foz",
-                                                "fizz"
-                                            ]
+                                            "required": ["foz", "fizz"]
                                         }
                                     }
                                 },
-                                "required": [
-                                    "foo"
-                                ]
+                                "required": ["foo"]
                             }
                         }
                     }
@@ -113,12 +106,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "code": {
-                                            "type": "number",
-                                            "description": "desc_override_code",
-                                            "default": "1",
-                                            "example": "1"
-                                        },
                                         "data": {
                                             "type": "object",
                                             "properties": {
@@ -127,15 +114,18 @@
                                                     "description": "desc_add_extra_data_key_in_doc"
                                                 }
                                             },
-                                            "required": [
-                                                "keyInDoc"
-                                            ]
+                                            "required": ["keyInDoc"]
                                         }
                                     },
                                     "type": "object",
-                                    "required": [
-                                        "data"
-                                    ]
+                                    "required": ["data"]
+                                },
+                                "examples": {
+                                    "response_desc": {
+                                        "data": {
+                                            "keyInExample": 1
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -148,7 +138,16 @@
                                     "$schema": "http://json-schema.org/draft-04/schema#",
                                     "title": "error_desc",
                                     "type": "object",
-                                    "properties": {}
+                                    "properties": {
+                                        "fooInJs": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "error_desc": {
+                                        "fooInJs": "barInJs"
+                                    }
                                 }
                             }
                         }
