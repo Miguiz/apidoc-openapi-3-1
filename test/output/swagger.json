@@ -113,12 +113,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "code": {
-                                            "type": "number",
-                                            "description": "desc_override_code",
-                                            "default": "1",
-                                            "example": "1"
-                                        },
                                         "data": {
                                             "type": "object",
                                             "properties": {
@@ -136,6 +130,13 @@
                                     "required": [
                                         "data"
                                     ]
+                                },
+                                "examples": {
+                                    "response_desc": {
+                                        "data": {
+                                            "keyInExample": 1
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -148,7 +149,16 @@
                                     "$schema": "http://json-schema.org/draft-04/schema#",
                                     "title": "error_desc",
                                     "type": "object",
-                                    "properties": {}
+                                    "properties": {
+                                        "fooInJs": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "error_desc": {
+                                        "fooInJs": "barInJs"
+                                    }
                                 }
                             }
                         }

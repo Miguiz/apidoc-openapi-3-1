@@ -29,7 +29,7 @@ function createOutputFile(swaggerData: string, options: DocOptions & {output?: s
     const output = options.output ?? './';
     const destPath = path.join(output, 'swagger.json');
 
-    options.silent !== true && console.log(`Write swagger json file: ${destPath} (dryRun=${options.dryRun})`);
+    options.silent !== true && console.log(`\x1b[0;32mWrite swagger json file\x1b[0m: ${destPath} (dryRun=${options.dryRun})`);
     if (options.dryRun) {
         return;
     }

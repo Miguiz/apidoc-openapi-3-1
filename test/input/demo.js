@@ -18,21 +18,18 @@
  *
  * @apiParamExample {json} request_desc
  * {{extraExample}}
- *
- * @apiSuccess {Number} [code=1] desc_override_code
  * @apiSuccess {Object} data data_desc
  * @apiSuccess {number} data.keyInDoc desc_add_extra_data_key_in_doc
  *
  * @apiSuccessExample {json} response_desc
  * HTTP/1.1 200 OK
  *  {
- "code": 200,
- "data": {
- "keyInExample": 1
- }
- }
+ *      "data": {
+ *          "keyInExample": 1
+ *      }
+ *  }
  *
  * @apiSuccessExample {json} error_desc
  * HTTP/1.1 300 OK
- * {{fooInJs:barInJs}}
+ * {"fooInJs":"barInJs"}
  */
