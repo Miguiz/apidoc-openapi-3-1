@@ -282,7 +282,7 @@ function generateResponses(verb: Record<string, any>) {
                 description: example.title ?? 'OK',
                 content: {
                     'application/json': {
-                        schema,
+                        schema: schema,
                         examples: {
                             ...(responses[code]?.content?.examples ?? {}),
                             [example.title]: json,
@@ -302,7 +302,7 @@ function generateResponses(verb: Record<string, any>) {
                 description: example.title ?? 'ERROR',
                 content: {
                     'application/json': {
-                        schema,
+                        schema: schema,
                         examples: {
                             ...(responses[code]?.content?.examples ?? {}),
                             [example.title]: json,
@@ -373,7 +373,8 @@ function safeParseJson(content: string, defaultCode = 200) {
     try {
         json = JSON.parse(mayContentString.replace(/,([ \t\n]+[}\])])/g, '$1'));
     } catch (error) {
-        console.warn('parse error', mayContentString, error);
+        const message = mayContentString + ((error instanceof Error) ? error.message : '');
+        console.warn("\x1b[0;33mparse error\x1b[0m: " + message);
     }
 
     return {code, json};

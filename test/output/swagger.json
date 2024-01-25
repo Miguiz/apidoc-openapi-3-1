@@ -14,7 +14,9 @@
     "paths": {
         "/test_api/{id}": {
             "post": {
-                "tags": ["search"],
+                "tags": [
+                    "search"
+                ],
                 "summary": "test_api_name",
                 "description": "desc_test_api",
                 "requestBody": {
@@ -39,11 +41,16 @@
                                                     "description": "desc_foo.fizz"
                                                 }
                                             },
-                                            "required": ["foz", "fizz"]
+                                            "required": [
+                                                "foz",
+                                                "fizz"
+                                            ]
                                         }
                                     }
                                 },
-                                "required": ["foo"]
+                                "required": [
+                                    "foo"
+                                ]
                             }
                         }
                     }
@@ -114,11 +121,15 @@
                                                     "description": "desc_add_extra_data_key_in_doc"
                                                 }
                                             },
-                                            "required": ["keyInDoc"]
+                                            "required": [
+                                                "keyInDoc"
+                                            ]
                                         }
                                     },
                                     "type": "object",
-                                    "required": ["data"]
+                                    "required": [
+                                        "data"
+                                    ]
                                 },
                                 "examples": {
                                     "response_desc": {
