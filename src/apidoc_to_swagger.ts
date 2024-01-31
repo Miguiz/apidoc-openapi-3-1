@@ -285,7 +285,7 @@ function generateResponses(verb: Record<string, any>) {
                         schema: schema,
                         examples: {
                             ...(responses[code]?.content?.examples ?? {}),
-                            [example.title]: json,
+                            [example.title]: {value: json},
                         },
                     },
                 },
@@ -305,7 +305,7 @@ function generateResponses(verb: Record<string, any>) {
                         schema: schema,
                         examples: {
                             ...(responses[code]?.content?.examples ?? {}),
-                            [example.title]: json,
+                            [example.title]: {value: json},
                         },
                     },
                 },
@@ -373,8 +373,8 @@ function safeParseJson(content: string, defaultCode = 200) {
     try {
         json = JSON.parse(mayContentString.replace(/,([ \t\n]+[}\])])/g, '$1'));
     } catch (error) {
-        const message = mayContentString + ((error instanceof Error) ? error.message : '');
-        console.warn("\x1b[0;33mparse error\x1b[0m: " + message);
+        const message = mayContentString + (error instanceof Error ? error.message : '');
+        console.warn('\x1b[0;33mparse error\x1b[0m: ' + message);
     }
 
     return {code, json};
