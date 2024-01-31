@@ -1,6 +1,6 @@
 {
     "name": "apidoc-openapi-3-1",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Utility for generate documentation of API like project.",
     "keywords": [
         "apidoc",
